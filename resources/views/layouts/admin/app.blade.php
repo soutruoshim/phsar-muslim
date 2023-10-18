@@ -49,7 +49,7 @@
     <script
         src="{{asset('public/assets/back-end')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
     <link rel="stylesheet" href="{{asset('public/assets/back-end')}}/css/toastr.css">
-
+    <link rel="icon" type="image/x-icon" href="{{asset('public/fav.ico')}}">
     @if (strstr(Request::url(),"payment/configuration/addon-payment-get") || strstr(Request::url(),"sms/configuration/addon-sms-get"))
         <style>
             .form-floating{

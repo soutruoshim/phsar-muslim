@@ -10,8 +10,8 @@
     <title>{{ translate($role) }} | {{ translate('login')}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
-
+    <!-- <link rel="shortcut icon" href="favicon.ico"> -->
+    <link rel="icon" type="image/x-icon" href="{{asset('public/fav.ico')}}">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
     <!-- CSS Implementing Plugins -->

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <title>Phsar-muslim</title>
-
+    <link rel="icon" type="image/x-icon" href="{{asset('public/fav.ico')}}">
     <!-- Bootstrap core CSS -->
     <link href="{{asset('public/assets/home-page')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

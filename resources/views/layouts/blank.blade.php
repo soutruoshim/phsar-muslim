@@ -9,7 +9,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('public/assets/installation')}}/assets/img/favicon.svg">
-
+    <!-- <link rel="icon" type="image/x-icon" href="{{asset('public/fav.ico')}}"> -->
     <!-- Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

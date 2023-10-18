@@ -46,6 +46,7 @@
             text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};
         }
     </style> -->
+    <link rel="icon" type="image/x-icon" href="{{asset('public/fav.ico')}}">
     <style>
         select {
             background-image: url('{{asset('/public/assets/back-end/img/arrow-down.png')}}');
