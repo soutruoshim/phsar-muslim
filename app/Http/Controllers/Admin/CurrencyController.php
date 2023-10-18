@@ -88,7 +88,7 @@ class CurrencyController extends Controller
 
     public function delete(Request $request)
     {
-        if (!in_array($request->id, [1, 2, 3, 4, 5])) {
+        if (!in_array($request->id, [1, 2])) {
             Currency::where('id', $request->id)->delete();
             return response()->json(['status' => 1]);
         } else {
