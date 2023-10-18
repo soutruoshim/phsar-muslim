@@ -46,14 +46,15 @@ class HomeController extends Controller
 
     public function index()
     {
-        $theme_name = theme_root_path();
+        // $theme_name = theme_root_path();
 
-        return match ($theme_name) {
-            'default' => self::default_theme(),
-            'theme_aster' => self::theme_aster(),
-            'theme_fashion' => self::theme_fashion(),
-            'theme_all_purpose' => self::theme_all_purpose(),
-        };
+        // return match ($theme_name) {
+        //     'default' => self::default_theme(),
+        //     'theme_aster' => self::theme_aster(),
+        //     'theme_fashion' => self::theme_fashion(),
+        //     'theme_all_purpose' => self::theme_all_purpose(),
+        // };
+        return view('home.index');
     }
 
     public function default_theme()
