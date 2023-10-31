@@ -410,7 +410,7 @@
                             <select
                                 class="js-example-basic-multiple js-states js-example-responsive form-control color-var-select"
                                 name="colors[]" multiple="multiple" id="colors-selector" disabled>
-                                @foreach (\App\Model\Color::orderBy('name', 'asc')->get() as $key => $color)
+                                @foreach (\App\Model\Color::orderBy('id', 'asc')->get() as $key => $color)
                                     <option value="{{ $color->code }}">
                                         {{ $color['name'] }}
                                     </option>
@@ -811,10 +811,13 @@
 
         function color_wise_image(t){
             let colors = t.val();
-            $('#color_wise_image').html('')
+            console.log(colors);
+            //$('#color_wise_image').html('')
             $.each(colors, function(key, value){
                 let value_id = value.replace('#','');
                 let color= "color_image_"+value_id;
+
+
 
                 html = `<div class="col-sm-12 col-md-4">
                             <div class="custom_upload_input position-relative border-dashed-2">
@@ -822,8 +825,10 @@
                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required onchange="uploadColorImage(this)">
 
                                 <div class="position-absolute right-0 top-0 d-flex gap-2">
-                                    <label for="color-img-upload-`+value_id+`" class="delete_file_input_css btn btn-outline-danger btn-sm square-btn position-relative" style="background: ${value};border-color: ${value};color:#fff">
-                                        <i class="tio-edit"></i>
+                                    <label for="color-img-upload-`+value_id+`" class="delete_file_input_css btn btn-outline-success btn-sm square-btn position-relative" style="border-color: #008000;color:#fff">
+
+                                        <span style="color:#008000">`+value_id+`</span>
+
                                     </label>
 
                                     <span class="delete_file_input btn btn-outline-danger btn-sm square-btn position-relative" style="display: none">
@@ -843,7 +848,37 @@
                             </div>
                         </div>`;
 
-                $('#color_wise_image').append(html);
+                 //==================remove================
+                 $("#color_wise_image :input").each(function(e){
+                      var nameInput = this.name;
+                      var id = this.id;
+                      console.log("name: ",nameInput);
+
+                      const color_from_name = nameInput.split('_');
+                      const color_input = "#"+color_from_name[2];
+
+                      console.log("check"+colors.includes(color_input));
+
+                      if(!colors.includes(color_input)){
+                        console.log("need remove",this.name)
+                        $(this).parent('div').parent('div').remove();
+                      }
+
+
+                 });
+                 //==================add new ==============
+                var isAdded = false;
+                $("#color_wise_image :input").each(function(e){
+                      if(color == this.name){
+                          isAdded = true;
+                          return false;
+                      }
+                 });
+
+                if(isAdded == false){
+                    $('#color_wise_image').append(html);
+                }
+                //=============end add new=================
 
                 $('.delete_file_input').click(function () {
                     let $parentDiv = $(this).parent().parent();
@@ -901,6 +936,9 @@
         }
 
         $(document).ready(function() {
+
+            // default sku
+            $('#generate_number').val(getRndInteger());
             // color select select2
             $('.color-var-select').select2({
                 templateResult: colorCodeSelect,
@@ -913,9 +951,11 @@
             function colorCodeSelect(state) {
                 var colorCode = $(state.element).val();
                 if (!colorCode) return state.text;
-                return "<span class='color-preview' style='background-color:" + colorCode + ";'></span>" + state
-                    .text;
+                // return "<span class='color-preview' style='background-color:" + colorCode + ";'></span>" + state
+                //     .text;
+                return  state.text;
             }
+
         });
     </script>
 

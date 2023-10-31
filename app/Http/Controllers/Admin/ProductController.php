@@ -659,10 +659,21 @@ class ProductController extends BaseController
 
     public function sku_combination(Request $request)
     {
+        //dd($request);
         $options = [];
+        $stock = [];
+
         if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
             $colors_active = 1;
             array_push($options, $request->colors);
+
+            foreach ($request->colors as $key => $no) {
+                $key = substr($no,1);
+                $name = "qty_".$key;
+                //array_push($stock, array($key => $name));
+                $stock[$key] = $request[$name];
+            }
+
         } else {
             $colors_active = 0;
         }
@@ -680,7 +691,7 @@ class ProductController extends BaseController
 
         $combinations = Helpers::combinations($options);
         return response()->json([
-            'view' => view('admin-views.product.partials._sku_combinations', compact('combinations', 'unit_price', 'colors_active', 'product_name'))->render(),
+            'view' => view('admin-views.product.partials._sku_combinations', compact('stock','combinations', 'unit_price', 'colors_active', 'product_name'))->render(),
         ]);
     }
 

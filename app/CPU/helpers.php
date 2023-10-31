@@ -263,7 +263,7 @@ class Helpers
 
     public static function units()
     {
-        $x = ['kg', 'pc', 'gms', 'ltrs'];
+        $x = ['pc','kg','gms', 'ltrs'];
         return $x;
     }
 

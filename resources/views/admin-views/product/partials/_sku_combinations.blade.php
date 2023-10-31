@@ -68,7 +68,7 @@
 					<input type="text" name="sku_{{ $str }}" value="{{ $sku }}" class="form-control" required placeholder="{{ translate('ex') }}: MCU47V593M">
 				</td>
 				<td>
-					<input type="number" onkeyup="update_qty()" name="qty_{{ $str }}" value="1" min="1" max="1000000" step="1" class="form-control" required placeholder="{{ translate('ex') }}: 5">
+					<input type="number" onkeyup="update_qty()" name="qty_{{ $str }}" value="{{ $stock[$str] }}" min="1" max="1000000" step="1" class="form-control" required placeholder="{{ translate('ex') }}: 5">
 				</td>
 			</tr>
 	@endif
