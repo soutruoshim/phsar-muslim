@@ -1,3 +1,9 @@
+<style>
+   .color-ball {
+    height: 25px!important;
+    border-radius: 100%;
+}
+</style>
 <div class="modal-header p-2">
     <h4 class="modal-title product-title">
     </h4>
@@ -118,7 +124,7 @@
                                             @if($key == 0) checked @endif autocomplete="off">
                                     <label id="label-{{ $product->id }}-color-{{ $key }}" class="color-ball mb-0 {{$key==0?'border-add':""}}" style="background: {{ $color }};"
                                             for="{{ $product->id }}-color-{{ $key }}"
-                                                data-toggle="tooltip"></label>
+                                                data-toggle="tooltip">{{substr($color,1)}}</label>
                                     @endforeach
                                 </div>
                             </div>
