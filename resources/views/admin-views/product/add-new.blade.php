@@ -817,8 +817,6 @@
                 let value_id = value.replace('#','');
                 let color= "color_image_"+value_id;
 
-
-
                 html = `<div class="col-sm-12 col-md-4">
                             <div class="custom_upload_input position-relative border-dashed-2">
                                 <input type="file" name="`+color+`" class="custom-upload-input-file" id="color-img-upload-`+value_id+`" data-index="1" data-imgpreview="additional_Image_${value_id}"

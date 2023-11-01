@@ -448,7 +448,7 @@
                                     class="js-example-basic-multiple js-states js-example-responsive form-control color-var-select"
                                     name="colors[]" multiple="multiple"
                                     id="colors-selector" {{count($product['colors'])>0?'':'disabled'}}>
-                                    @foreach (\App\Model\Color::orderBy('name', 'asc')->get() as $key => $color)
+                                    @foreach (\App\Model\Color::orderBy('id', 'asc')->get() as $key => $color)
                                         <option
                                             value={{ $color->code }} {{in_array($color->code,$product['colors'])?'selected':''}}>
                                             {{$color['name']}}
@@ -1040,7 +1040,7 @@
                             <div class="col-6 col-md-4 col-xl-4">
                                 <div class="position-relative p-2 border-dashed-2">
                                     <div class="upload--icon-btns d-flex gap-2 position-absolute z-index-2 p-2" >
-                                        <button type="button" class="btn btn-square text-white btn-sm" style="background: #${color_value['color']}"><i class="tio-done"></i></button>
+                                        <button type="button" class="btn btn-square text-white btn-sm" style="border-color: #008000;color:#fff">`+value_id+`</button>
                                         <a href="`+remove_url+`?id=`+product_id+`&name=`+image_name+`&color=`+color_value['color']+`"
                                     class="btn btn-outline-danger btn-sm square-btn"><i class="tio-delete"></i></a>
                                     </div>
@@ -1064,8 +1064,8 @@
                     let html = ` <div class='col-6 col-md-4 col-xl-4'>
                                     <div class="position-relative p-2 border-dashed-2">
                                         <label style='border-radius: 3px; cursor: pointer; text-align: center; overflow: hidden; position : relative; display: flex; align-items: center; margin: auto; justify-content: center; flex-direction: column;'>
-                                        <span class="upload--icon" style="background: ${value}">
-                                        <i class="tio-edit"></i>
+                                        <span class="upload--icon" style="color:#008000;border-color: #008000; border: 1px solid;">`+value_id+`
+                                        
                                             <input type="file" name="` + input_image_name + `" id="` + value_id + `" class="d-none" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required="">
                                         </span>
 
@@ -1134,7 +1134,8 @@
             function colorCodeSelect(state) {
                 var colorCode = $(state.element).val();
                 if (!colorCode) return state.text;
-                return "<span class='color-preview' style='background-color:" + colorCode + ";'></span>" + state.text;
+                //return "<span class='color-preview' style='background-color:" + colorCode + ";'></span>" + state.text;
+                return  state.text;
             }
         });
     </script>
