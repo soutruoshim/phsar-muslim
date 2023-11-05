@@ -171,6 +171,8 @@ class POSController extends Controller
                                     }
                                 })->orWhere(function ($q) use ($request) {
                                     $q->where('code', 'like', "%{$request['name']}%");
+                                })->orWhere(function ($q) use ($request) {
+                                    $q->where('product_code', 'like', "%{$request['name']}%");
                                 })->where('added_by','admin')->where('status',1)->paginate(6);
 
         $count_p = $products->count();$count_p = $products->count();

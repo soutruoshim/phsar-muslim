@@ -74,14 +74,14 @@
                                     onerror="this.src='{{asset('public/assets/back-end/img/160x160/img2.jpg')}}'" alt="{{$cartItem['name']}} image">
                             <div class="media-body">
                                 <h5 class="text-hover-primary mb-0">
-                                    {{Str::limit($cartItem['name'], 12)}}
+                                    {{Str::limit($cartItem['name'], 12)}} - {{$product['product_code']}}
                                     @if($cartItem['tax_model'] == 'include')
                                         <span class="ml-2" data-toggle="tooltip" data-placement="top" title="{{translate('tax_included')}}">
                                             <img class="info-img" src="{{asset('/public/assets/back-end/img/info-circle.svg')}}" alt="img">
                                         </span>
                                     @endif
                                 </h5>
-                                <small>{{Str::limit($cartItem['variant'], 20)}}</small>
+                                <small>#{{Str::limit($cartItem['variant'], 20)}}</small>
                             </div>
                         </div>
                     </td>

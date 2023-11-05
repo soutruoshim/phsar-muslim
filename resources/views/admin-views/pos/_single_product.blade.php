@@ -6,7 +6,7 @@
 
     <div class="pos-product-item_content clickable">
         <div class="pos-product-item_title">
-            {{ $product['name'] }}
+            {{ $product['name'] }} -  {{ $product['product_code'] }}
         </div>
         <div class="pos-product-item_price">
             {{ \App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($product['unit_price']- \App\CPU\Helpers::get_product_discount($product, $product['unit_price'])))  }}

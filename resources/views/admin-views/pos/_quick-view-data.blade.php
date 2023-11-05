@@ -1,3 +1,10 @@
+<style>
+    .color-select input:checked + label {
+        border: 1px solid var(--c1);
+        background: #0d6efd;
+        color: white;
+    }
+    </style>
 <div class="modal-header p-2">
     <h4 class="modal-title product-title">
     </h4>
@@ -114,9 +121,9 @@
                                             id="{{ $product->id }}-color-{{ $key }}"
                                             name="color" value="{{ $color }}"
                                             @if($key == 0) checked @endif autocomplete="off">
-                                    <label id="label-{{ $product->id }}-color-{{ $key }}" class="{{$key==0?'border-add':""}}" style="background: {{ $color }};"
+                                    <label id="label-{{ $product->id }}-color-{{ $key }}" class="{{$key==0?'border-add':""}}" style="min-width: 35px; text-align: center; font-weight: bold;"
                                             for="{{ $product->id }}-color-{{ $key }}"
-                                                data-toggle="tooltip">9{{substr($color,1)}}</label>
+                                                data-toggle="tooltip">#{{substr($color,1)}}</label>
                                     @endforeach
                                 </div>
                             </div>
