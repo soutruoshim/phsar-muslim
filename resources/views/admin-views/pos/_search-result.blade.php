@@ -6,7 +6,7 @@
                 <img class="avatar avatar-xl border" width="75" onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'"
                 src="{{\App\CPU\ProductManager::product_image_path('thumbnail')}}/{{$product['thumbnail']}}" alt="">
                 <div class="media-body d-flex flex-column gap-1">
-                    <h6 class="fz-13 mb-1 text-truncate custom-width">{{$product['name']}}</h6>
+                    <h6 class="fz-13 mb-1 text-truncate custom-width">{{$product['name']}} - {{$product['product_code']}}</h6>
                     <div class="fz-10">{{ translate('category') }}: {{ $product->category->name ?? 'N/a' }}</div>
                     <div class="fz-10">{{ translate('brand_Name') }}: {{ $product->brand->name }}</div>
                     @if ($product->added_by == 'admin')

@@ -151,8 +151,10 @@
                                                         @if ($detail->variant)
                                                             <div><strong>{{translate('variation')}} :</strong> {{$detail['variant']}}</div>
                                                         @endif
+                                                        <div><strong>{{translate('product_code')}} :</strong> {{$detail['product']['product_code']}}</div>
                                                     </div>
                                                 </div>
+
                                                 @if($detail->product_all_status->digital_product_type == 'ready_after_sell')
                                                     <button type="button" class="btn btn-sm btn--primary mt-2" title="File Upload" data-toggle="modal" data-target="#fileUploadModal-{{ $detail->id }}" onclick="modalFocus('fileUploadModal-{{ $detail->id }}')">
                                                         <i class="tio-file-outlined"></i> {{translate('file')}}

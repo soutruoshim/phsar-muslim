@@ -49,6 +49,10 @@
                     <div class="font-weight-bold text-dark">{{ translate('product_SKU') }}:</div>
                     <div>{{ $product->code }}</div>
                 </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="font-weight-bold text-dark">{{ translate('product_code') }}:</div>
+                    <div>{{ $product->product_code }}</div>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
