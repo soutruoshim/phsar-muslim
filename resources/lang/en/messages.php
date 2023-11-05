@@ -6377,4 +6377,7 @@
   'shop_address_is_required' => 'Shop address is required',
   'shop_apply_successfully' => 'Shop apply successfully',
   'We are sorry  server is not responding' => 'We are sorry  server is not responding',
+  'package_price'=> 'Package Price',
+  'minimum_package_order_qty' => 'Minimum Qty Package',
+  'product_code' => 'Product Code'
 );

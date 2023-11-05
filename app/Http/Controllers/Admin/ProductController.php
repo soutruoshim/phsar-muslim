@@ -106,10 +106,13 @@ class ProductController extends BaseController
             'tax'                  => 'required|min:0',
             'tax_model'            => 'required',
             'unit_price'           => 'required|numeric|gt:0',
+            'package_price'        => 'required|numeric|gt:0',
+            'minimum_package_order_qty'   => 'required|numeric|gt:0',
             'purchase_price'       => 'required|numeric|gt:0',
             'discount'             => 'required|gt:-1',
             'shipping_cost'        => 'required_if:product_type,==,physical|gt:-1',
             'code'                 => 'required|numeric|min:1|digits_between:6,20|unique:products',
+            'product_code'         => 'required|unique:products',
             'minimum_order_qty'    => 'required|numeric|min:1',
         ], [
             'image.required'                   => translate('product_thumbnail_is_required!'),
@@ -169,6 +172,7 @@ class ProductController extends BaseController
         $p->added_by = "admin";
         $p->name     = $request->name[array_search('en', $request->lang)];
         $p->code     = $request->code;
+        $p->product_code     = $request->product_code;
         $p->slug     = Str::slug($request->name[array_search('en', $request->lang)], '-') . '-' . Str::random(6);
 
         $product_images = [];
@@ -295,6 +299,8 @@ class ProductController extends BaseController
         //combinations end
         $p->variation         = $request->product_type == 'physical' ? json_encode($variations) : json_encode([]);
         $p->unit_price        = BackEndHelper::currency_to_usd($request->unit_price);
+        $p->package_price        = BackEndHelper::currency_to_usd($request->package_price);
+        $p->minimum_package_order_qty        = BackEndHelper::currency_to_usd($request->minimum_package_order_qty);
         $p->purchase_price    = BackEndHelper::currency_to_usd($request->purchase_price);
         $p->tax               = $request->tax_type == 'flat' ? BackEndHelper::currency_to_usd($request->tax) : $request->tax;
         $p->tax_type          = $request->tax_type;
@@ -726,6 +732,8 @@ class ProductController extends BaseController
             'digital_product_type'  => 'required_if:product_type,==,digital',
             'digital_file_ready'    => 'mimes:jpg,jpeg,png,gif,zip,pdf',
             'unit'                  => 'required_if:product_type,==,physical',
+            'package_price'        => 'required|numeric|gt:0',
+            'minimum_package_order_qty'   => 'required|numeric|gt:0',
             'tax'                   => 'required|min:0',
             'tax_model'             => 'required',
             'unit_price'            => 'required|numeric|gt:0',
@@ -734,6 +742,7 @@ class ProductController extends BaseController
             'shipping_cost'         => 'required_if:product_type,==,physical|gt:-1',
             'code'                  => 'required|numeric|min:1|digits_between:6,20|unique:products,code,'.$product->id,
             'minimum_order_qty'     => 'required|numeric|min:1',
+            'product_code'         => 'required|unique:products,product_code,'.$product->id,
         ], [
             'name.required'                     => 'Product name is required!',
             'category_id.required'              => 'category  is required!',
@@ -884,6 +893,7 @@ class ProductController extends BaseController
         $product->unit                  = $request->product_type == 'physical' ? $request->unit : null;
         $product->digital_product_type  = $request->product_type == 'digital' ? $request->digital_product_type : null;
         $product->code                  = $request->code;
+        $product->product_code     = $request->product_code;
         $product->minimum_order_qty     = $request->minimum_order_qty;
         $product->details               = $request->description[array_search('en', $request->lang)];
 
@@ -956,6 +966,8 @@ class ProductController extends BaseController
         //combinations end
         $product->variation      = $request->product_type == 'physical' ? json_encode($variations) : json_encode([]);
         $product->unit_price     = BackEndHelper::currency_to_usd($request->unit_price);
+        $product->package_price        = BackEndHelper::currency_to_usd($request->package_price);
+        $product->minimum_package_order_qty        = BackEndHelper::currency_to_usd($request->minimum_package_order_qty);
         $product->purchase_price = BackEndHelper::currency_to_usd($request->purchase_price);
         $product->tax            = $request->tax == 'flat' ? BackEndHelper::currency_to_usd($request->tax) : $request->tax;
         $product->tax_type       = $request->tax_type;

@@ -196,6 +196,7 @@
                                 <div class="mt-2">{{translate('file_type')}}: jpg, jpeg, png, gif, zip, pdf</div>
                             </div>
                         </div>
+                       
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="title-color d-flex justify-content-between gap-2">
@@ -213,6 +214,24 @@
                                 <input type="text" id="generate_number" name="code" class="form-control"  value="{{ $product->code  }}" required>
                             </div>
                         </div>
+
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="form-group">
+                                <label class="title-color d-flex justify-content-between gap-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        {{ translate('product_code') }}
+                                        <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"  title="{{translate('create_a_unique_product_code_by_clicking_on_the_“Generate_Code”_button')}}">
+                                            <img src="{{asset('/public/assets/back-end/img/info-circle.svg')}}" alt="">
+                                        </span>
+                                    </div>
+                                
+                                </label>
+                                <input type="text" minlength="6" id="product_code" name="product_code"
+                                        class="form-control" value="{{ $product->product_code  }}"
+                                        placeholder="{{ translate('product_code') }}" required>
+                            </div>
+                        </div>
+
                         <div class="col-md-6 col-lg-4 col-xl-3 physical_product_show">
                             <div class="form-group">
                                 <label class="title-color">{{translate('unit')}}</label>
@@ -285,6 +304,37 @@
                                         value={{\App\CPU\Convert::default($product->unit_price)}} required>
                             </div>
                         </div>
+                        
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="form-group">
+                                <div class="d-flex gap-2 mb-2">
+                                    <label class="title-color mb-0">{{ translate('package_price') }}($)</label>
+
+                                    <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"  title="{{translate('set_the_selling_price_for_each_unit_of_this_product._This_Package_Price_section_won’t_be_applied_if_you_set_a_variation_wise_price')}}.">
+                                        <img src="{{asset('/public/assets/back-end/img/info-circle.svg')}}" alt="">
+                                    </span>
+                                </div>
+                                <input type="number" min="0" step="0.01"
+                                        placeholder="{{ translate('package_price') }}" name="package_price"
+                                        value={{\App\CPU\Convert::default($product->package_price)}} class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="form-group">
+                                <div class="d-flex gap-2 mb-2">
+                                    <label class="title-color mb-0">{{ translate('minimum_package_order_qty') }}</label>
+
+                                    <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"  title="{{translate('set_the_selling_price_for_each_unit_of_this_product._This_Pacakge_Qaitity_section_won’t_be_applied_if_you_set_a_variation_wise_price')}}.">
+                                        <img src="{{asset('/public/assets/back-end/img/info-circle.svg')}}" alt="">
+                                    </span>
+                                </div>
+                                <input type="number" min="0" step="0.01"
+                                        placeholder="{{ translate('minimum_package_order_qty') }}" name="minimum_package_order_qty"
+                                        value={{ $product->minimum_package_order_qty }} class="form-control" required>
+                            </div>
+                        </div>
+
                         <div class="col-md-6 col-lg-4 col-xl-3" id="minimum_order_qty">
                             <div class="form-group">
                                 <div class="d-flex gap-2">

@@ -6378,4 +6378,7 @@
   'shop_apply_successfully' => 'Shop apply successfully',
   'We are sorry  server is not responding' => 'We are sorry  server is not responding',
   'search_by_name_or_sku' => 'Search by name or sku',
+  'package_price'=> 'Package Price',
+  'minimum_package_order_qty' => 'Minimum Qty Package',
+  'product_code' => 'Product Code'
 );

@@ -18,6 +18,8 @@ class Product extends Model
         'published' => 'integer',
         'tax' => 'float',
         'unit_price' => 'float',
+        'package_price' => 'float',
+        'minimum_package_order_qty' => 'integer',
         'status' => 'integer',
         'discount' => 'float',
         'current_stock' => 'integer',
