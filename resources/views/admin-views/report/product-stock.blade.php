@@ -118,6 +118,9 @@
                                 {{translate('product_Name')}}
                             </th>
                             <th>
+                                {{translate('product_code')}}
+                            </th>
+                            <th>
                                 {{translate('last_Updated_Stock')}}
                             </th>
                             <th class="text-center">
@@ -139,6 +142,7 @@
                                         </a>
                                     </div>
                                 </td>
+                                <td>{{$data['product_code'] }}</td>
                                 <td>{{ date('d M Y, h:i:s a', $data['updated_at'] ? strtotime($data['updated_at']) : null) }}</td>
                                 <td class="text-center">{{$data['current_stock']}}</td>
                                 <td>

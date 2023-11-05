@@ -360,6 +360,8 @@
                         <br>
                         Variation : {{$details['variant']}}
                         @endif
+                        <br>
+                        Variation : {{$details['product']?$details['product']->product_code:''}}
                     </td>
                     <td>{{\App\CPU\BackEndHelper::set_symbol(\App\CPU\BackEndHelper::usd_to_currency($details['price']))}}</td>
                     <td>{{$details->qty}}</td>
