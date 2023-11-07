@@ -1095,8 +1095,9 @@
                         Swal.fire({
                             icon: 'error',
                             title: "{{ translate('Cart') }}",
-                            text: '{{ translate("sorry_product_is_out_of_stock.")}}'
+                            text: '{{ translate("sorry_product_is_out_of_stock.")}} And Current Stock is ' + data.stock
                         });
+
                         return false;
                     }
                     $('.call-when-done').click();

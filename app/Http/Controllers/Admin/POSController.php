@@ -318,7 +318,6 @@ class POSController extends Controller
         $data['variant'] = $str;
         $cart = session($cart_id);
         if (session()->has($cart_id) && count($cart) > 0) {
-
             foreach ($cart as $key => $cartItem) {
                 if (is_array($cartItem) && $cartItem['id'] == $request['id'] && $cartItem['variant'] == $str) {
 
@@ -332,9 +331,31 @@ class POSController extends Controller
                         for ($i = 0; $i < $count; $i++) {
                             if (json_decode($product->variation)[$i]->type == $str) {
                                 $price = json_decode($product->variation)[$i]->price;
+
+                                $p_qty = json_decode($product->variation)[$i]->qty;
+                                $current_qty = $p_qty - $request['quantity_in_cart'];
+                                if($current_qty<0)
+                                {
+                                    return response()->json([
+                                        'data' => 0,
+                                        'stock' => $p_qty,
+                                        'view' => view('admin-views.pos._cart',compact('cart_id'))->render()
+                                    ]);
+                                }
+
                             }
                         }
                     }else{
+                        $p_qty = $product->current_stock;
+                        $current_qty = $p_qty - $request['quantity_in_cart'];
+                        if($product->product_type == 'physical' && $current_qty<0)
+                        {
+                            return response()->json([
+                                'data' => 0,
+                                'stock' => $p_qty,
+                                'view' => view('admin-views.pos._cart',compact('cart_id'))->render()
+                            ]);
+                        }
                         $price = $product->unit_price;
                     }
 
@@ -350,6 +371,7 @@ class POSController extends Controller
                     return response()->json([
                         'data' => 1,
                         'in_cart_data' => 1,
+                        'str' => $str,
                         'request_quantity' => $request['quantity_in_cart'],
                         'view' => view('admin-views.pos._cart-summary')->render(),
                     ]);
@@ -371,6 +393,7 @@ class POSController extends Controller
                     {
                         return response()->json([
                             'data' => 0,
+                            'stock' => $p_qty,
                             'view' => view('admin-views.pos._cart',compact('cart_id'))->render()
                         ]);
                     }
@@ -380,12 +403,14 @@ class POSController extends Controller
                 }
             }
         } else {
+
             $p_qty = $product->current_stock;
             $current_qty = $p_qty - $request['quantity'];
             if($product->product_type == 'physical' && $current_qty<0)
             {
                 return response()->json([
                     'data' => 0,
+                    'stock' => $p_qty,
                     'view' => view('admin-views.pos._cart',compact('cart_id'))->render()
                 ]);
             }
