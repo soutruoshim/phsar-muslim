@@ -6380,5 +6380,6 @@
   'search_by_name_or_sku' => 'Search by name or sku or product code',
   'package_price'=> 'Package Price',
   'minimum_package_order_qty' => 'Minimum Qty Package',
-  'product_code' => 'Product Code'
+  'product_code' => 'Product Code',
+  'search_by_name_or_product_code' => 'By name or product code',
 );

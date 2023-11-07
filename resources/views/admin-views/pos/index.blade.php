@@ -1202,7 +1202,7 @@
 
                 if(data.product_type==='physical' && data.qty<0)
                 {
-                    toastr.warning('{{translate("product_quantity_is_not_enough")}}!', {
+                    toastr.warning('Current Stock is '+data.stock+' {{translate("product_quantity_is_not_enough")}}!', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1232,7 +1232,7 @@
 
                 if(data.product_type==='physical' && data.qty<0)
                 {
-                    toastr.warning('{{translate("product_quantity_is_not_enough")}}!', {
+                    toastr.warning('Current Stock is '+data.stock+' {{translate("product_quantity_is_not_enough")}}!', {
                         CloseButton: true,
                         ProgressBar: true
                     });

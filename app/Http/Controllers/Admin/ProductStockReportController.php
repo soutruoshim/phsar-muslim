@@ -88,7 +88,8 @@ class ProductStockReportController extends Controller
                 $query->where(['added_by' => 'seller', 'user_id' => $seller_id]);
             })
             ->when(!empty($search), function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%");
+                $q->where('product_code', 'like', "%{$search}%");
+                $q->orwhere('name', 'like', "%{$search}%");
             })
             ->orderBy('current_stock', $sort);
     }

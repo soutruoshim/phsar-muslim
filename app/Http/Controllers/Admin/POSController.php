@@ -558,6 +558,7 @@ class POSController extends Controller
                             return response()->json([
                                 'qty' => $qty,
                                 'product_type' => $product->product_type,
+                                'stock'=> $product_qty,
                                 'view' => view('admin-views.pos._cart',compact('cart_id'))->render()
                                 ]);
                         }

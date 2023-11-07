@@ -86,7 +86,7 @@
                             <input type="hidden" value="{{ $category_id }}" name="category_id">
                             <input type="hidden" value="{{ $sort }}" name="sort">
                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                   placeholder="{{translate('search_Product_Name')}}" aria-label="Search orders" value="{{ $search }}">
+                                   placeholder="{{translate('search_by_name_or_product_code')}}" aria-label="Search orders" value="{{ $search }}">
                             <button type="submit" class="btn btn--primary">{{translate('search')}}</button>
                         </div>
                         <!-- End Search -->
