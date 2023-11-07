@@ -409,7 +409,9 @@ class ProductController extends BaseController
 
 
                         foreach ($key as $value) {
-                            return $query->where('name', 'like', "%{$value}%")->orWhereIn('id', $product_ids);
+                            return $query->where('name', 'like', "%{$value}%")->orWhereIn('id', $product_ids)
+                            ->orWhere('product_code', 'like', "%{$value}%")->orWhereIn('id', $product_ids)
+                            ;
                         }
                     })->when(!empty($request->seller_id) && $request->has('seller_id') ,function($query)use($request){
                         return $query->where('user_id',$request->seller_id);

@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                           placeholder="{{translate('search_Product_Name')}}" aria-label="Search orders"
+                                           placeholder="{{translate('search_by_name_or_product_code')}}" aria-label="Search orders"
                                            value="{{ request('search') }}" >
                                     <input type="hidden" value="{{ request('status') }}" name="status">
                                     <button type="submit" class="btn btn--primary">{{translate('search')}}</button>
@@ -164,6 +164,7 @@
                             <tr>
                                 <th>{{translate('SL')}}</th>
                                 <th>{{translate('product Name')}}</th>
+                                <th>{{translate('product_code')}}</th>
                                 <th class="text-right">{{translate('product Type')}}</th>
                                 <th class="text-right">{{translate('purchase_price')}}</th>
                                 <th class="text-right">{{translate('selling_price')}}</th>
@@ -184,6 +185,9 @@
                                             {{\Illuminate\Support\Str::limit($p['name'],20)}}
                                         </span>
                                     </a>
+                                </td>
+                                <td class="text-right">
+                                    {{$p['product_code']}}
                                 </td>
                                 <td class="text-right">
                                     {{translate(str_replace('_',' ',$p['product_type']))}}
