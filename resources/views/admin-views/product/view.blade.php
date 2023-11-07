@@ -179,12 +179,12 @@
                                     <a href="javascript:" class="text-dark">{{$product->reviews->whereNotNull('comment')->count()}} {{translate('reviews')}}</a>
                                 </div>
 
-                                @if ($product_active)
+                                {{-- @if ($product_active)
                                     <a href="{{route('product',$product['slug'])}}" class="btn btn-outline--primary mr-1" target="_blank">
                                         <i class="tio-globe"></i>
                                         {{ translate('view_live') }}
                                     </a>
-                                @endif
+                                @endif --}}
                                 @if($product->digital_file_ready && file_exists(base_path('storage/app/public/product/digital-product/'.$product->digital_file_ready)))
                                 <a href="{{ asset('storage/app/public/product/digital-product/'.$product->digital_file_ready) }}" class="btn btn-outline--primary mr-1" title="Download" download>
                                     <i class="tio-download"></i>
@@ -277,6 +277,11 @@
                                     <span>:</span>
                                     <span class="value">{{$product->code}}</span>
                                 </div>
+                                <div>
+                                    <span class="key text-nowrap">{{translate('product_code')}}</span>
+                                    <span>:</span>
+                                    <span class="value">{{$product->product_code}}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-xl-4">
@@ -337,6 +342,7 @@
                                 <div class="pair-list">
                                     @if (json_decode($product->choice_options) != null)
                                         @foreach (json_decode($product->choice_options) as $key => $value)
+                                        
                                         <div>
                                             @if (array_filter($value->options) != null)
                                                 <span class="key text-nowrap">{{translate($value->title)}}</span>
@@ -354,15 +360,29 @@
                                     @endif
 
                                     @if (json_decode($product->colors) != null)
+                                     
                                         <div>
                                             <span class="key text-nowrap">{{translate('color')}}</span>
                                             <span>:</span>
                                             <span class="value">
                                                 @foreach (json_decode($product->colors) as $key => $value)
-                                                    {{ \App\CPU\get_color_name($value) }}
+                                                    {{-- {{ \App\CPU\get_color_name($value) }} --}}
+                                                    {{$value}}
+                                                    @foreach (json_decode($product->variation) as $key_v => $value_v)
+                                                      @if ($value_v->type == substr($value, 1)) 
+                                                         @if($value_v->qty == 0)
+                                                         <span class="text-danger">( Out Stock {{$value_v->qty}} )</span>
+                                                         @else
+                                                         <span class="text-success">( In Stock {{$value_v->qty}} )</span>
+                                                         @endif
+                                                      @endif
+                                                    @endforeach
+
                                                     @if ($key === array_key_last(json_decode($product->colors)))@break @endif
                                                     ,
                                                 @endforeach
+
+
                                             </span>
                                         </div>
                                     @endif
