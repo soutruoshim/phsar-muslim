@@ -12,7 +12,7 @@ use Cassandra\Collection;
 use Illuminate\Support\Str;
 use App\Model\ShippingType;
 use App\Model\CategoryShippingCost;
-
+use Illuminate\Support\Facades\DB;
 class CartManager
 {
     public static function cart_to_db($request=null)
@@ -32,6 +32,28 @@ class CartManager
                 $cart->customer_id = $user->id;
                 $cart->is_guest = 0;
                 $cart->save();
+            }
+        }
+    }
+    public static function cartUpdatePrice($customerId)
+    {
+    $result = Cart::select('product_id', DB::raw('SUM(quantity) as total_quantity'))
+        ->where('customer_id', $customerId)
+        ->groupBy('product_id')
+        ->get();
+        
+        foreach ($result as $cartItem) {
+            $productId = $cartItem->product_id;
+            $totalQuantity = $cartItem->total_quantity;
+            $product = Product::find($productId);
+            if($totalQuantity >= 5){
+                Cart::where('product_id', $productId)
+                    ->where('customer_id', $customerId)
+                    ->update(['price' => $product->package_price]);
+            }else{
+                Cart::where('product_id', $productId)
+                ->where('customer_id', $customerId)
+                ->update(['price' => $product->unit_price]);
             }
         }
     }
@@ -55,6 +77,7 @@ class CartManager
 
         return $cart;
     }
+
 
     public static function get_cart_for_api($request, $group_id=null)
     {

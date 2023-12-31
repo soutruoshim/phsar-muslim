@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use function App\CPU\translate;
 
+
 class CartController extends Controller
 {
     public function __construct(
@@ -24,19 +25,33 @@ class CartController extends Controller
     {
         $user = Helpers::get_customer($request);
         $cart_query = Cart::with('product:id,name,slug,current_stock,minimum_order_qty,variation');
+        $customerId = '0';
+        
         if($user == 'offline'){
             $cart = $cart_query->where(['customer_id' => $request->guest_id, 'is_guest'=>1])->get();
+            $customerId = $request->guest_id;
+            
         }else{
             $cart = $cart_query->where(['customer_id' => $user->id, 'is_guest'=>'0'])->get();
+            $customerId = $user->id;
         }
-
+        
+        CartManager::cartUpdatePrice($customerId);
+        
+        if($user == 'offline'){
+            $cart = $cart_query->where(['customer_id' => $request->guest_id, 'is_guest'=>1])->get();
+            $customerId = $request->guest_id;
+            
+        }else{
+            $cart = $cart_query->where(['customer_id' => $user->id, 'is_guest'=>'0'])->get();
+            $customerId = $user->id;
+        }
 
         if($cart) {
             foreach($cart as $key => $value){
                 if(!isset($value['product'])){
                     $cart_data = Cart::find($value['id']);
                     $cart_data->delete();
-
                     unset($cart[$key]);
                 }
             }
@@ -72,6 +87,7 @@ class CartController extends Controller
 
                 return $data;
             });
+
         }
 
         return response()->json($cart, 200);
